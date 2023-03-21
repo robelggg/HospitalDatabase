@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2023 at 08:51 PM
+-- Generation Time: Mar 21, 2023 at 11:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,15 @@ CREATE TABLE `appointment` (
   `Date_Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`Appointment_Num`, `Insurance_ID`, `Doc_ID`, `Date_Time`) VALUES
+('1006', 'XM382748J', '435', '2023-01-09 17:15:00'),
+('1007', 'XM275429L', '673', '2023-01-12 15:05:00'),
+('1008', 'XM178390Y', '847', '2023-01-13 20:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +55,15 @@ CREATE TABLE `doctor` (
   `First_Name` varchar(20) DEFAULT NULL,
   `Specialization` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `doctor`
+--
+
+INSERT INTO `doctor` (`Doc_ID`, `Last_Name`, `First_Name`, `Specialization`) VALUES
+('435', 'Johnson', 'Fred', 'Dermatology'),
+('673', 'Buble', 'Richard', 'Anesthesiology'),
+('847', 'Jackson', 'Owen', 'Internal Medicine');
 
 -- --------------------------------------------------------
 
@@ -67,7 +85,9 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`Insurance_ID`, `Insurance_Company`, `Last_Name`, `First_Name`, `Phone_Num`, `Address`) VALUES
-('XM382748J', 'Fidelis', 'Joe', 'Swanson', '303-643-8000', '23 Fulton St.');
+('XM178390Y', 'GoodHealth', 'Swan', 'Amy', '903-274-1937', '3022 New City'),
+('XM275429L', 'CarePlus', 'Griffin', 'Emily', '917-498-2351', '40 Wall St.'),
+('XM382748J', 'Fidelis', 'Swanson', 'Joe', '303-643-8000', '23 Fulton St.');
 
 --
 -- Indexes for dumped tables
