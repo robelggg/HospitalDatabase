@@ -23,12 +23,26 @@ public class Doctor {
     private String Specialization;
     
     //Constructor that takes in 4 variables and assigns them to an instance of the Doctor class
-    public Doctor(int doctorId, String doctorLastName, String doctorFirstName, String Specialization){
+    public Doctor(int doctorId){
         
         this.doctorId = doctorId;
-        this.doctorLastName = doctorLastName;
-        this.doctorFirstName = doctorFirstName;
-        this.Specialization = Specialization;
+        /**
+         *  
+         * For the rest of these private variables, I was thinking that 
+         * we could use some kind of method related to the database connection class
+         * where we could simply use the doctorId that the user inputs in order to find
+         * out what the last name, first name and specialization is
+         * 
+         * for example, if someone inputs the doctor id 102 into the GUI, this constructor would use a method
+         * to connect to the database and run a select statement like "SELECT Last_Name FROM Doctor WHERE Doc_ID = 102"
+         * and the last name that returns would be assigned to this.doctorLastName
+         * 
+         * ex: this.doctorLastName = MethodName("SELECT Last_Name FROM Doctor WHERE Doc_ID = " + doctorId + ");
+         * 
+        this.doctorLastName ;
+        this.doctorFirstName ;
+        this.Specialization ;
+        */ 
     }
     
     //Getter that returns a doctor's Id
