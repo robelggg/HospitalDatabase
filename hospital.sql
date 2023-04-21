@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2023 at 12:07 AM
+-- Generation Time: Apr 22, 2023 at 01:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `appointment` (
-  `Appointment_Num` decimal(4,0) NOT NULL,
+  `Appointment_ID` decimal(4,0) NOT NULL,
   `Insurance_ID` char(9) DEFAULT NULL,
   `Doc_ID` char(3) DEFAULT NULL,
   `Date_Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -38,7 +38,7 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`Appointment_Num`, `Insurance_ID`, `Doc_ID`, `Date_Time`) VALUES
+INSERT INTO `appointment` (`Appointment_ID`, `Insurance_ID`, `Doc_ID`, `Date_Time`) VALUES
 ('1006', 'XM382748J', '435', '2023-01-09 17:15:00'),
 ('1007', 'XM275429L', '673', '2023-01-12 15:05:00'),
 ('1008', 'XM178390Y', '847', '2023-01-13 20:00:00');
@@ -97,7 +97,9 @@ INSERT INTO `patient` (`Insurance_ID`, `Insurance_Company`, `Last_Name`, `First_
 -- Indexes for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`Appointment_Num`);
+  ADD PRIMARY KEY (`Appointment_ID`),
+  ADD KEY `Doc_ID` (`Doc_ID`),
+  ADD KEY `Insurance_ID` (`Insurance_ID`);
 
 --
 -- Indexes for table `doctor`
@@ -110,6 +112,17 @@ ALTER TABLE `doctor`
 --
 ALTER TABLE `patient`
   ADD PRIMARY KEY (`Insurance_ID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Doc_ID`) REFERENCES `doctor` (`Doc_ID`),
+  ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`Insurance_ID`) REFERENCES `patient` (`Insurance_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
