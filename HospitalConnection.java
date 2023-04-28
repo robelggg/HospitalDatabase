@@ -12,7 +12,8 @@ import java.sql.*;
  */
 public class HospitalConnection {
     
-    private final String DB_URL = "jdbc:mysql://localhost:3306/Psychiatric";
+    //All the variables needed in order to connect to the MYSQL database
+    private final String DB_URL = "jdbc:mysql://localhost:3306/hospital";
     private final String DB_DRV = "com.mysql.jdbc.Driver";
     private final String DB_USER = "root";
     private final String DB_PASSWD = "";
