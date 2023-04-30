@@ -5,100 +5,31 @@
 
 package hospitaldatabase3;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class HospitalConnection {
-    
-    // Database connection settings
-    private final String DB_URL = "jdbc:mysql://localhost:3306/hospital";
-    private final String DB_DRV = "com.mysql.jdbc.Driver";
-    private final String DB_USER = "root";
-    private final String DB_PASSWD = "";
-    
-    private Connection connection = null;
-    private Statement statement = null;
-    private ResultSet resultSet = null;
+    private Connection connection;
 
     public HospitalConnection() {
+        try {
+            String url = "jdbc:mysql://localhost:3306/HospitalDatabase";
+            String user = "root";
+            String password = "";
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.connection = DriverManager.getConnection(url, user, password);
+            if (this.connection != null) {
+                System.out.println("Connected to the database HospitalDatabase");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("An error occurred. Maybe user/password is invalid");
+            e.printStackTrace();
+        }
     }
 
-    public int InsertStatement(String table, String newValue) {
-        int rowsEffected = 0;
-
-        try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            statement = connection.createStatement();
-            rowsEffected = statement.executeUpdate("INSERT INTO " + table + " VALUES (" + newValue + ")");
-
-        } catch (SQLException ex) {
-            System.out.println("Error:" + ex);
-        }
-
-        return rowsEffected;
-    }
-
-    public int UpdateStatement(String table, String column, String newValue, String condition) {
-        int rowsEffected = 0;
-
-        try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            statement = connection.createStatement();
-            rowsEffected = statement.executeUpdate("UPDATE " + table + " SET " + column + " = " + newValue + " WHERE " + condition);
-
-        } catch (SQLException ex) {
-            System.out.println("Error:" + ex);
-        }
-
-        return rowsEffected;
-    }
-
-    public int DeleteStatement(String table, String condition) {
-        int rowsEffected = 0;
-
-        try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            statement = connection.createStatement();
-            rowsEffected = statement.executeUpdate("DELETE FROM " + table + " WHERE " + condition);
-
-        } catch (SQLException ex) {
-            System.out.println("Error:" + ex);
-        }
-
-        return rowsEffected;
-    }
-
-    public ResultSet SelectStatement(String column, String table) {
-        try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT " + column + " FROM " + table);
-
-        } catch (SQLException ex) {
-            System.out.println("Error:" + ex);
-        }
-        return resultSet;
-    }
-
-    public ResultSet SelectStatement(String column, String table, String condition) {
-        try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE " + condition);
-
-        } catch (SQLException ex) {
-            System.out.println("Error:" + ex);
-        }
-        return resultSet;
-    }
-
-    public void EndConnection() {
-        try {
-            resultSet.close();
-            statement.close();
-            connection.close();
-        } catch (SQLException ex) {
-            System.out.println("Error:" + ex);
-        }
+    public Connection getConnection() {
+        return this.connection;
     }
 }
-
