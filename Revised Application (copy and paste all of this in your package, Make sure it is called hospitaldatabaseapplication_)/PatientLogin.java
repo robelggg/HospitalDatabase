@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  */
 public class PatientLogin extends javax.swing.JFrame {
 
+    //This is the password for all patients
     String patientPassword = "abc123";
     
     /**
@@ -115,51 +116,64 @@ public class PatientLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        
+        //The purpose of this button is to send the user back to the previous HomeScreen when they press it
+        
+        //Makes this Jframe invisible to the user
         this.setVisible(false);
 
+        //Makes an instance of the HospitalHomeScreenFrame
         HospitalHomeScreenFrame hS = new HospitalHomeScreenFrame();
+        //Makes the HospitalHomeScreenFrame visible to the user
         hS.setVisible(true);
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        
+        //These two variables represent whatever String values the user has typed into both text fields on this Jframe
         String id = txtPatientID.getText();
         String password = txtPassword.getText();
         
         //Creates an object of the connection class that we will use to access sql statements
         HospitalConnection connection1 = new HospitalConnection();
         
-        //Getting a resultset that includes all rows from staff table that have the id that the user put in
+        //Getting a resultset that includes all rows from patien table that have the id that the user put in
         ResultSet resultset = connection1.SelectStatement("insurance_Id", "patient","insurance_id LIKE '"+id+"'");
         
-        //Intializes and assigns a null value to realID which will hold the staff id from the database that matches the one the user inputs
+        //Intializes and assigns a null value to realID which will hold the insurance id from the database that matches the one the user inputs
         String realID = "";
         
-        //Try and catch block used in order to assign the staff id gained in resultset to the variable realID
+        //Try and catch block used in order to assign the insurance id gained in resultset to the variable realID
         try {
             //This "if(resultset.next()){}" IS REALLY IMPORTANT, it allows the resultset to work when it only contains one row from a table
             if(resultset.next()){
+                //This assigns the value of any matching insurance id to the variable realID
                 realID = resultset.getString(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PatientLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //This if statement checks if the password and staff id are valid, if any of them are not valid, then it will open a new window saying that it is not valid
+        //This if statement checks if the password and insurance id are valid, if any of them are not valid, then it will open a new window saying that it is not valid
         if(!password.equals(patientPassword) || !realID.equals(id)){
             
-            //creates an instance of the BadLogin Frame and makes a new window of it visible
+            //creates an instance of the BadLogin Frame when the password or id is incorrect and makes a new window of it visible
             BadLogin bL = new BadLogin();
             bL.setVisible(true);
         }else{
             
-            //If the password and id are valid, then the login screen is made invisible and a new instance of the PsychMenu is made visible
+            //If the password and id are valid, then the login screen is made invisible and a new instance of the PatientAppointmentFrame is made visible
             this.setVisible(false);
             
+            //A new instance of the patient appointment frame is made and is given the valid insurance ID that the user inputted
+            //This is done so the patient appointment frame can use that ID in order to run a select statement on all rows in appointment
+            //That contain that Insurance ID
             PatientAppointmentFrame instance1 = new PatientAppointmentFrame(id);
+            //This new instance of the patient appointment frame is made visible to the user
             instance1.setVisible(true);
         }
         
-        //Connection is destroyed yay!
+        //Connection is ended
         connection1.EndConnection();
     }//GEN-LAST:event_LoginActionPerformed
 

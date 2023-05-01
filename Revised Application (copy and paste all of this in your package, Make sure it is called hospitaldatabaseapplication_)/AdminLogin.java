@@ -14,6 +14,7 @@ public class AdminLogin extends javax.swing.JFrame {
      * Creates new form AdminLogin
      */
     
+    //These are the valid admin password and admin ID
     private String adminId = "admin";
     private String adminPassword = "AdminRules";
     
@@ -112,24 +113,32 @@ public class AdminLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        //Pressing this back button will return the user to the main menu
+        
+        //This makes this JFrame invisible
         this.setVisible(false);
         
+        //This creates a new instance of the home screen and makes that home screen visible to the user
         HospitalHomeScreenFrame hS = new HospitalHomeScreenFrame();
         hS.setVisible(true);
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         
+        //Stores the Strings that the user inputted into the text fields
         String id = txtAdminID.getText();
         String password = txtPassword.getText();
         
+        //Checks if the password and ID are valid
         if (!adminId.equals(id) || !adminPassword.equals(password)){
             
+            //If they are not valid, then bad login frame is made visible
             BadLogin bL = new BadLogin();
             bL.setVisible(true);
             
         }else{
             
+            //IF login id and password are valid, then this frame is made invisible and the admin panel frame is made visible
             this.setVisible(false);
             
             AdminPanelFrame apf = new AdminPanelFrame();

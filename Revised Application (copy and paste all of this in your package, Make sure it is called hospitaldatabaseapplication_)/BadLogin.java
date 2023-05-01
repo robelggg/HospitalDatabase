@@ -19,6 +19,8 @@ public class BadLogin extends javax.swing.JFrame {
     public BadLogin() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        //The purpose of this frame is for it to pop up whenever a login attempt is invalid in order to inform the user that it is invalid
     }
 
     /**

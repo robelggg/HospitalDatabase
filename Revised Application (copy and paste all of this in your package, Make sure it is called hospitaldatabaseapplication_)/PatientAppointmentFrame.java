@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PatientAppointmentFrame extends javax.swing.JFrame {
 
+    //This variable will hold whatever correct insurance ID the user put in, in the patient login screen
     private String patientID = "";
     
     /**
@@ -25,6 +26,7 @@ public class PatientAppointmentFrame extends javax.swing.JFrame {
      */
     public PatientAppointmentFrame(String patientId) {
         initComponents();
+        //The valid insurance ID that the user put in during the patient login screen is assigned to this variable
         this.patientID = "'"+patientId+"'";
     }
 
@@ -135,34 +137,50 @@ public class PatientAppointmentFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        
+        //This back button allows the user to click on it and be sent back to the previous Patient Login Screen
+        
+        //Makes this Jframe invisible to the user
         this.setVisible(false);
         
+        //Creates a new instance of the PatientLogin and makes the Patient Login Jframe visible to the user
         PatientLogin pL = new PatientLogin();
         pL.setVisible(true);
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void AppointmentSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppointmentSearchActionPerformed
+        
+        //Later on used to hold the column count
         int c = 0;
         
+        //Establishes a connection to the hospital database
         HospitalConnection connection1 = new HospitalConnection();
         
+        //Holds the result set from a select statement that gets back all rows from the appointment table that match the PatientID from the patient login screen
         ResultSet resultset = connection1.SelectStatement("*", "Appointment", "insurance_id LIKE "+patientID);
         
         try {
             
+            //Instance of this result set meta data class is made so we can input all the results of the resultset and put them in the JTable
             ResultSetMetaData Rss = resultset.getMetaData();
             
+            //C is assigned the number of columns
             c = Rss.getColumnCount();
             
+            //Made this instance of the Default Table Model class in order to access the Jtable on this frame
             DefaultTableModel Df = (DefaultTableModel)jTable1.getModel();
             
+            //sets row count to equal column count
             Df.setRowCount(c);
             
+            //While loop used to cycle between each row in the appointment table and assigned them to each row of the JTable
             while(resultset.next()){
                 Vector v2 = new Vector();
                 
+                //For loop used in order to assign data to the JTable
                 for(int a = 1; a <= c; a++){
                     
+                    //These all represent the columns in the JTable that we want to fill with their respective column in the database appointment table
                     v2.add(resultset.getString("Appointment_Id"));
                     v2.add(resultset.getString("Insurance_Id"));
                     v2.add(resultset.getString("Doc_Id"));
@@ -175,6 +193,7 @@ public class PatientAppointmentFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PatientAppointmentFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Connection to database is ended once this select statement already achieved its use
         connection1.EndConnection();
     }//GEN-LAST:event_AppointmentSearchActionPerformed
 

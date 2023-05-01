@@ -91,29 +91,49 @@ public class HospitalHomeScreenFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientButtonActionPerformed
+        
+        //This makes the HospitalHomeScreenFrame turn non visible
         this.setVisible(false);
         
+        //This creates an instance of the PatientLogin class
         PatientLogin pL = new PatientLogin();
+        //The Jframe for PatientLogin is made visible
         pL.setVisible(true);
+        
+        //This code moves the user to the Patient login screen from the home screen when they press the patient button
     }//GEN-LAST:event_PatientButtonActionPerformed
 
     private void DoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorButtonActionPerformed
+        
+        //This makes the HospitalHomeScreenFrame turn non visible
         this.setVisible(false);
         
+        //This creates an instance of the DoctorLogin class
         DoctorLogin dL = new DoctorLogin();
+        //The Jframe for PatientLogin is made visible
         dL.setVisible(true);
+        
+        //This code moves the user to the doctor login screen from the home screen when they press the doctor button
     }//GEN-LAST:event_DoctorButtonActionPerformed
 
     private void AdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButtonActionPerformed
+        
+        ////This makes the HospitalHomeScreenFrame turn non visible
         this.setVisible(false);
         
+        //This creates an instance of the AdminLogin class
         AdminLogin aL = new AdminLogin();
+        //The Jframe for PatientLogin is made visible
         aL.setVisible(true);
+        
+        //This code moves the user to the Admin login screen from the home screen when they press the doctor button
     }//GEN-LAST:event_AdminButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    
+    //Main method that starts the program
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -141,6 +161,7 @@ public class HospitalHomeScreenFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                //Creates an instance of the HospitalHomeScreenFrame when the application first runs, makes the Jframe for this class visible to the user
                 new HospitalHomeScreenFrame().setVisible(true);
             }
         });
