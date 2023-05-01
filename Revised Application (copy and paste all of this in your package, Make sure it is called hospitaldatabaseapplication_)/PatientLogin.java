@@ -46,7 +46,7 @@ public class PatientLogin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Patient Login");
 
-        jLabel2.setText("Patient ID:");
+        jLabel2.setText("Insurance ID:");
 
         jLabel3.setText("Password:");
 
@@ -88,7 +88,7 @@ public class PatientLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(BackButton)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
